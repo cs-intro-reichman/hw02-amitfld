@@ -16,7 +16,7 @@ public class OneOfEachStats {
         Random generator = new Random(seed);
 
         // Initialize all the required variables
-        int kidsCount, twoKids = 0, threeKids = 0, fourKids = 0, totalKids = 0, commonFamily, max;
+        int kidsCount, twoKids = 0, threeKids = 0, fourKidsOrMore = 0, totalKids = 0, commonFamily, max;
         boolean girl, boy;
         double num, avarage_kids;
         String output = "";
@@ -50,14 +50,14 @@ public class OneOfEachStats {
             if (kidsCount == 3){
                 threeKids ++;
             }
-            if (kidsCount == 4){
-                fourKids ++;
+            if (kidsCount >= 4){
+                fourKidsOrMore ++;
             }
         }
         // Calculate the average number of children needed to get at least one of each gender
         avarage_kids = (double) totalKids / T;
         // Determine the most common number of children in families
-        max = Math.max(Math.max(twoKids, threeKids), fourKids);
+        max = Math.max(Math.max(twoKids, threeKids), fourKidsOrMore);
         if (max == twoKids){
             commonFamily = 2;
         } else {
@@ -68,12 +68,16 @@ public class OneOfEachStats {
             }
         }
         // Construct the output message with statistics about the families and children
-        output = "Avarage: " + avarage_kids + " children to get at least one of each gender.\n";
+        output = String.format("Avarage: %.2f children to get at least one of each gender.\n", avarage_kids);
+        //output = "Avarage: " + avarage_kids + " children to get at least one of each gender.\n";
         output += "Number of families with 2 children: " + twoKids + "\n";
         output += "Number of families with 3 children: " + threeKids + "\n";
-        output += "Number of families with 4 children: " + fourKids + "\n";
+        output += "Number of families with 4 or more children: " + fourKidsOrMore + "\n";
         output += "The most common number of children is " + commonFamily + ".";
+
         // Print the output message displaying the statistics
         System.out.println(output);
+        System.out.println(totalKids);
+
     }
 }
