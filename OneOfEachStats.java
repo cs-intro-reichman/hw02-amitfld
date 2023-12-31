@@ -1,6 +1,6 @@
 import java.util.Random;
 /**
- *  Computes some statistics about families in which the parents decide 
+ *  Computes some statistics about families in which the parents decide
  *  to have children until they have at least one child of each gender.
  *  The program expects to get two command-line arguments: an int value
  * 	that determines how many families to simulate, and an int value
@@ -8,22 +8,74 @@ import java.util.Random;
  *  Example usage: % java OneOfEachStats 1000 1
  */
 public class OneOfEachStats {
-	public static void main (String[] args) {
-		// Gets the two command-line arguments
-		int T = Integer.parseInt(args[0]);
-		int seed = Integer.parseInt(args[1]);
-		// Initailizes a random numbers generator with the given seed value
-        Random generator = new Random(seed);  
-		
-		//// In the previous version of this program, you used a statement like:
-		//// double rnd = Math.random();
-		//// Where "rnd" is the variable that stores the generated random value.
-		//// In this version of the program, replace this statement with:
-		//// double rnd = generator.nextDouble();
-		//// This statement will generate a random value in the range [0,1),
-		//// just like you had in the previous version, except that the 
-		//// randomization will be based on the given seed.
-		//// This is the only change that you have to do in the program.
-		    
-	}
+    public static void main (String[] args) {
+        // Gets the two command-line arguments
+        int T = Integer.parseInt(args[0]);
+        int seed = Integer.parseInt(args[1]);
+        // Initailizes a random numbers generator with the given seed value
+        Random generator = new Random(seed);
+
+        // Initialize all the required variables
+        int kidsCount, twoKids = 0, threeKids = 0, fourKids = 0, totalKids = 0, commonFamily, max;
+        boolean girl, boy;
+        double num, avarage_kids;
+        String output = "";
+
+        // Loop 'T' times to simulate 'T' families
+        for (int i = 0; i < T; i++){
+            kidsCount = 0;
+            girl = false;
+            boy = false;
+
+            // Simulate the birth of children in a family until at least one boy and one girl are born
+            while(!girl || !boy){
+                // Generate a random number between 0.0 (inclusive) and 1.0 (exclusive)
+                num = generator.nextDouble();
+                // If the generated number is bigger than or equal to 0.5 it's a boy
+                if (num >= 0.5){
+                    boy = true;
+                }
+                // If the generated number is less than 0.5 it's a girl
+                if (num < 0.5){
+                    girl = true;
+                }
+                // Increment the count of children in the family and the count of total children across all families
+                kidsCount ++;
+                totalKids ++;
+            }
+            // Update counters based on the number of children in each family
+            if (kidsCount == 2) {
+                twoKids++;
+            }
+            if (kidsCount == 3){
+                threeKids ++;
+            }
+            if (kidsCount == 4){
+                fourKids ++;
+            }
+        }
+        // Calculate the average number of children needed to get at least one of each gender
+        avarage_kids = (float) totalKids / T;
+        // Determine the most common number of children in families
+        max = Math.max(Math.max(twoKids, threeKids), fourKids);
+        if (max == twoKids){
+            commonFamily = 2;
+        } else {
+            if (max == threeKids){
+                commonFamily = 3;
+            }else{
+                commonFamily = 4;
+            }
+        }
+        // Construct the output message with statistics about the families and children
+        output = "Avarage: " + avarage_kids + " children to get at least one of each gender.\n";
+        output += "Number of families with 2 children:" + twoKids + "\n";
+        output += "Number of families with 3 children:" + threeKids + "\n";
+        output += "Number of families with 4 children:" + fourKids + "\n";
+        output += "The most common number of children is " + commonFamily + ".";
+        // Print the output message displaying the statistics
+        System.out.println(output);
+        System.out.println(totalKids);
+
+    }
 }
