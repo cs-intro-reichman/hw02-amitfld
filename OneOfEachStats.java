@@ -68,14 +68,12 @@ public class OneOfEachStats {
             }
         }
         // Construct the output message with statistics about the families and children
-        output = String.format("Avarage: %.2f children to get at least one of each gender.\n", avarage_kids);
+        output = "Avarage: " + avarage_kids + " children to get at least one of each gender.\n";
         output += "Number of families with 2 children:" + twoKids + "\n";
         output += "Number of families with 3 children:" + threeKids + "\n";
         output += "Number of families with 4 children:" + fourKids + "\n";
         output += "The most common number of children is " + commonFamily + ".";
         // Print the output message displaying the statistics
         System.out.println(output);
-        System.out.println(totalKids);
-
     }
 }
