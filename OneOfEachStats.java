@@ -77,7 +77,6 @@ public class OneOfEachStats {
 
         // Print the output message displaying the statistics
         System.out.println(output);
-        System.out.println(totalKids);
 
     }
 }

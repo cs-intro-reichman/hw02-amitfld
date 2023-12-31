@@ -21,7 +21,7 @@ public class Reverse {
             // Print the reversed string
             System.out.println(reversedStr);
             // Print the middle character of the original string
-            System.out.println(str.charAt((str.length() - 1) / 2));
+            System.out.println("The middle character is " + str.charAt((str.length() - 1) / 2));
         }
     }
 }
