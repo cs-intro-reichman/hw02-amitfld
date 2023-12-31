@@ -55,7 +55,7 @@ public class OneOfEachStats {
             }
         }
         // Calculate the average number of children needed to get at least one of each gender
-        avarage_kids = (float) totalKids / T;
+        avarage_kids = (double) totalKids / T;
         // Determine the most common number of children in families
         max = Math.max(Math.max(twoKids, threeKids), fourKids);
         if (max == twoKids){
